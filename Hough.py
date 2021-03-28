@@ -75,7 +75,6 @@ class Hough(object):
         return [int(x), int(y)]
 
     def segmented_intersections(self, vertical_lines, horizontal_lines):
-        """Finds the intersections between groups of lines."""
         intersections = []
         for v_line in vertical_lines:
             for h_line in horizontal_lines:
@@ -164,17 +163,13 @@ class Hough(object):
         iw = np.maximum(inter_xmax - inter_xmin + 1., 0.)
         ih = np.maximum(inter_ymax - inter_ymin + 1., 0.)
 
-        # 2. calculate the area of inters
         inters = iw * ih
 
-        # 3. calculate the area of union
         union = ((pred_xmax - pred_xmin + 1.) * (pred_ymax - pred_ymin + 1.) +
                (gt_xmax - gt_xmin + 1.) * (gt_ymax - gt_ymin + 1.) -
                inters)
 
-        # 4. calculate the overlaps between pred_box and gt_box
         iou = inters / union
-
 
         return iou
 
